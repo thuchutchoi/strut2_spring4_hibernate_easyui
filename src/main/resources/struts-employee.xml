@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">	
+
+<struts>
+    <!-- Normal Action mappings are defined here -->
+	<package name="default" namespace="" extends="json-default">
+<!-- 		<interceptors> -->
+<!-- 			<interceptor-stack name="defaultStack"> -->
+<!-- 				<interceptor-ref name="json"> -->
+<!-- 					<param name="enableSMD">true</param> -->
+<!-- 				</interceptor-ref> -->
+<!-- 			</interceptor-stack> -->
+<!-- 		</interceptors> -->
+<!-- 		<default-interceptor-ref name="defaultStack" /> -->
+		<action name="get_employee" class="lstEmpAction" method="execute">
+			<result name="success" type="json"/>
+		</action>
+		<action name="delete/*" class="editEmployeeAction" method="deleteEmployee">
+		    <param name="employee.id">{1}</param>
+			<result type="redirect">/list</result>
+		</action>
+		<action name="list" class="editEmployeeAction" method="listEmployees">
+			<result>/view/editEmployeeList.jsp</result>
+		</action>
+		
+		<action name="add" class="editEmployeeAction" method="addEmployee">
+			<result type="redirect">/list</result>
+		</action>
+		<action name="save_user" class="editEmployeeAction" method="saveEmployee">
+			<result name="success" type="json"/>
+		</action>
+		<action name="update_user" class="editEmployeeAction" method="updateEmp">
+			<result name="success" type="json"/>
+		</action>
+		
+		<action name="destroy_user" class="editEmployeeAction" method="removeEmpl">
+			<result name="success" type="json"/>
+		</action>
+		
+	</package>
+</struts>

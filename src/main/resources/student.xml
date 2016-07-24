@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="dataGrid" extends="json-default">
+		
+        <action name="studentAction" class="com.howtodoinjava.controller.StudentAction" method="execute">
+            <result name="success" type="json"/>
+        </action>
+    	<action name="test" class="com.howtodoinjava.controller.StudentAction" method="test">
+		  <result>/view/student.jsp</result>
+		</action> 
+    </package>
+
+</struts>    
