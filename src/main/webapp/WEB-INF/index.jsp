@@ -15,4 +15,5 @@
 <a href="javascript:getJSONData()">Read</a><br>
 <a href="list">list</a><br>
 <a href="test">test</a><br>
+<a href="register">register</a><br>
 </body>

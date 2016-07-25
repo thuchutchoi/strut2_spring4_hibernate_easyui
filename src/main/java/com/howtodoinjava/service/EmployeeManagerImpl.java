@@ -2,6 +2,8 @@ package com.howtodoinjava.service;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.howtodoinjava.dao.EmployeeDAO;
@@ -14,7 +16,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	//This method will be called when a employee object is added
 	@Override
 	@Transactional
-	public void addEmployee(EmployeeEntity employee) {
+	public void addEmployee(EmployeeEntity employee) throws HibernateException{
 		employeeDAO.addEmployee(employee);
 	}
 	
@@ -27,7 +29,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	//Deletes a employee by it's id
 	@Override
 	@Transactional
-	public void deleteEmployee(Integer employeeId) {
+	public void deleteEmployee(Integer employeeId) throws ObjectNotFoundException,HibernateException{
 		employeeDAO.deleteEmployee(employeeId);
 	}
 	
@@ -56,7 +58,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
 
 	@Override
 	@Transactional
-	public void removeEmpl(int idEmp) {
+	public void removeEmpl(int idEmp) throws ObjectNotFoundException,HibernateException {
 	    employeeDAO.removeEmpl(idEmp);
 	}
 

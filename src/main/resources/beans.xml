@@ -23,6 +23,11 @@
 	        <ref bean="employeeManager"/>
 	     </property>
     </bean>
+    <bean name="userAction" class="com.howtodoinjava.controller.UserAction" scope="prototype">
+	     <property name="userDAO">
+	        <ref bean="userDao"/>
+	     </property>
+    </bean>
     
      <!-- Make scope prototype; This is really important. -->
     <bean name="lstEmpAction" class="com.howtodoinjava.controller.LstEmpAction" scope="prototype">
@@ -32,6 +37,11 @@
     </bean>
     
     <!-- These beans are injected automatically by spring context -->
+    <bean id="userDao" class="com.howtodoinjava.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+     <!-- These beans are injected automatically by spring context -->
     <bean id="employeeDAO" class="com.howtodoinjava.dao.EmployeeDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

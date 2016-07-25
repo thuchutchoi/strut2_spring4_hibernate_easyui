@@ -47,7 +47,7 @@ public class LstEmpAction extends ActionSupport implements ServletRequestAware{
 		logger.info("listEmployees method called");
 		int page =Integer.parseInt(servletRequest.getParameter("page"));
 		int row = Integer.parseInt(servletRequest.getParameter("rows"));
-		rows = new ArrayList<EmployeeEntity>();
+		//rows = new ArrayList<EmployeeEntity>();
 		rows=employeeManager.getAllEmployees(page,row);
 		total = employeeManager.getTotalEmployees();
 		rows=employeeManager.getAllEmployeesByNativeCode(page,row);

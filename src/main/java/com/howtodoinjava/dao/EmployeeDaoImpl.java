@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
@@ -18,7 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 
 	// This method will be called when a employee object is added
 	@Override
-	public void addEmployee(EmployeeEntity employee) {
+	public void addEmployee(EmployeeEntity employee) throws HibernateException{
 		this.sessionFactory.getCurrentSession().save(employee);
 	}
 
@@ -31,7 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 
 	// Deletes a employee by it's id
 	@Override
-	public void deleteEmployee(Integer employeeId) {
+	public void deleteEmployee(Integer employeeId) throws ObjectNotFoundException,HibernateException {
 		EmployeeEntity employee = (EmployeeEntity) sessionFactory.getCurrentSession().load(EmployeeEntity.class,
 				employeeId);
 		if (null != employee) {
@@ -79,7 +81,7 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public void removeEmpl(int idEmp) {
+	public void removeEmpl(int idEmp)throws ObjectNotFoundException,HibernateException  {
 		deleteEmployee(idEmp);
 	}
 

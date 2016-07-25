@@ -39,5 +39,9 @@
 			<result name="success" type="json"/>
 		</action>
 		
+		<action name="register" class="editEmployeeAction" method="listEmployees">
+			<result>/view/register.jsp</result>
+		</action>
+		
 	</package>
 </struts>

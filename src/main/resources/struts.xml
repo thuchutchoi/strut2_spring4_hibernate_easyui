@@ -28,5 +28,6 @@
 	<include file="struts-employee.xml"></include>
 	<include file="student.xml"></include>
 	<include file="test.xml"></include>
+	<include file="register.xml"></include>
 	
 </struts>
