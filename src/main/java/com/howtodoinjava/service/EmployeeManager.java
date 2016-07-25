@@ -15,4 +15,7 @@ public interface EmployeeManager {
 	public int getTotalEmployees();
 	public int updateEmployee(EmployeeEntity employee);
 	public void removeEmpl(int i);
+	public List<EmployeeEntity> getAllEmployeesByNativeCode(int page, int row);
+	public Long getTotalEmployeesByNativeCode();
+	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row);
 }

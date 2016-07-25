@@ -1,8 +1,11 @@
 package com.howtodoinjava.dao;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
@@ -78,5 +81,53 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 	@Override
 	public void removeEmpl(int idEmp) {
 		deleteEmployee(idEmp);
+	}
+
+	@Override
+	public List<EmployeeEntity> getAllEmployeesByNativeCode(int page, int row) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM employee");
+		sql.append(" LIMIT :limit");
+		sql.append(" OFFSET :offset");
+		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery(sql.toString());
+		q.setParameter("limit", row);
+		q.setParameter("offset", (page-1)*row);
+		q.addEntity(EmployeeEntity.class);
+		return q.list();
+	}
+
+	@Override
+	public Long getTotalEmployeesByNativeCode() {
+		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery("SELECT COUNT(id) FROM employee");
+		BigInteger result =(BigInteger) q.uniqueResult();
+		Long count= result.longValue();
+		return count;
+	}
+
+	@Override
+	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row) {
+		List<EmployeeEntity> lstRs = new ArrayList<EmployeeEntity>();
+		StringBuilder sql = new StringBuilder("SELECT * FROM employee");
+		sql.append(" LIMIT :limit");
+		sql.append(" OFFSET :offset");
+		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery(sql.toString());
+		q.setParameter("limit", row);
+		q.setParameter("offset", (page-1)*row);
+		List<Object[]> lst= q.list();
+		for (int i = 0; i < lst.size(); i++) {
+			Object[] objects = lst.get(i);
+			Integer id=(Integer) objects[0];
+			String firstname=(String) objects[1];
+			String lastname=(String) objects[2];
+			String telephone=(String) objects[3];
+			String email=(String) objects[4];
+			EmployeeEntity emp = new EmployeeEntity.Builder()
+			                     .id(id)
+			                     .firstname(firstname)
+			                     .lastname(lastname)
+			                     .telephone(telephone)
+			                     .email(email).build();
+			lstRs.add(emp);
+		}
+		return lstRs;
 	}
 }

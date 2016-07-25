@@ -59,4 +59,22 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	public void removeEmpl(int idEmp) {
 	    employeeDAO.removeEmpl(idEmp);
 	}
+
+	@Override
+	@Transactional
+	public List<EmployeeEntity> getAllEmployeesByNativeCode(int page, int row) {
+		return employeeDAO.getAllEmployeesByNativeCode(page,row);
+	}
+
+	@Override
+	@Transactional
+	public Long getTotalEmployeesByNativeCode() {
+		return employeeDAO.getTotalEmployeesByNativeCode();
+	}
+
+	@Override
+	@Transactional
+	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row) {
+		return employeeDAO.getAllEmployeesByNativeCodeArray(page,row);
+	}
 }

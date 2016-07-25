@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.howtodoinjava.dto.Report;
-import com.howtodoinjava.dto.Report.Builder;
-
 @Entity
 @Table(name="EMPLOYEE")
 public class EmployeeEntity {
