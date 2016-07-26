@@ -22,4 +22,5 @@ public interface EmployeeDAO
 	public List<EmployeeEntity> getAllEmployeesByNativeCode(int page, int row);
 	public Long getTotalEmployeesByNativeCode();
 	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row);
+	public List<Object[]> getAllEmployeesByNativeCodeArrayUsingProcedure(int page, int row);
 }

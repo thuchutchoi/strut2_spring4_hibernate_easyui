@@ -23,7 +23,7 @@ public class UserAction extends ActionSupport {
 	private UserDAO userDAO;
 	private static ClassValidator<User> userValidator = new ClassValidator<User>(User.class);
 	private Boolean error;
-	private Map<String, String> mapErr = new HashedMap()<String, String>;
+	private Map<String, String> mapErr = new HashedMap();
 
 	public String add() {
 		try {

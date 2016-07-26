@@ -1,0 +1,155 @@
+DELIMITER $$
+CREATE PROCEDURE procedureName()
+BEGIN
+   /*Xu ly*/
+END; $$
+DELIMITER ;
+
+Dòng đầu tiên DELIMITER $$ dùng để phân cách bộ nhớ lưu trữ thủ tục Cache và mở ra một ô lưu trữ mới. Đây là cú pháp nên bắt buộc bạn phải nhập như vậy
+Dòng CREATE PROCEDURE procedureName() dùng để khai báo tạo một Procedure mới, trong đó procedureName chính là tên thủ tục còn hai từ đầu là từ khóa.
+BEGIN và END; $$ dùng để khai báo bắt đầu của Procedure và kết thúc Procedure
+Cuối cùng là đóng lại ô lưu trữ DELIMITER ;
+
+DELIMITER $$
+ 
+DROP PROCEDURE IF EXISTS `GetAllProducts`$$
+ 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllProducts`()
+BEGIN
+   SELECT *  FROM products;
+END$$
+ 
+DELIMITER ;
+
+	
+CALL GetAllProducts();
+
+show procedure status;
+
+
+ELIMITER $$
+ 
+DROP PROCEDURE IF EXISTS `GetAllEmployee`$$
+ 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllEmployee`(IN row INT(11), IN page INT(11))
+BEGIN
+   SELECT *  FROM employee LIMIT row OFFSET page;
+END$$
+ 
+DELIMITER ;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS changeTitle $$
+CREATE PROCEDURE changeTitle(OUT title VARCHAR(255))
+BEGIN
+    SET title = 'Hoc lap trinh online tai freetuts.net';
+END; $$
+DELIMITER;
+CALL changeTitle(@title);
+SELECT @title;
+
+DELIMITER $$
+ 
+DROP PROCEDURE IF EXISTS counter $$
+ 
+CREATE PROCEDURE counter(INOUT number INT(11))
+BEGIN
+    SET number = number + 1;
+END; $$
+DELIMITER;
+
+SET @counter = 1;
+CALL counter(@counter);
+SELECT @counter;
+
+
+DELIMITER $$
+ 
+DROP PROCEDURE IF EXISTS `checkLogin`$$
+ 
+CREATE PROCEDURE `checkLogin`(
+    IN input_username VARCHAR(255),
+    IN input_password VARCHAR(255),
+    OUT result VARCHAR(255)
+)
+BEGIN
+    /*Bien flag luu tru level. Mac dinh la -1*/
+    DECLARE flag INT(11) DEFAULT -1;
+     
+    /*Thuc hien truy van gan level vao bien flag(Sử dụng SET hoặc SELECT INTO)*/
+    SELECT us_level INTO flag FROM members
+    WHERE us_username = input_username AND us_password = MD5(input_password);
+ 
+    /*Sau khi thuc hien lenh select nay ma ko co du lieu thi
+      luc nay flag se khong thay doi. Chinh vi the neu flag = -1 tuc la sai thong tin
+    */
+    IF (flag <= 0) THEN
+            SET result = 'Thong tin dang nhap sai';
+        ELSEIF (flag = 0) THEN
+            SET result = 'Tai khoan bi khoa';
+        ELSEIF (flag = 1) THEN
+            SET result = 'Tai khoan admin';
+        ELSE
+            SET result = 'Tai khoan member';
+    END IF;
+END$$
+ 
+DELIMITER ;
+
+
+CALL checkLogin('admin', 'vancuong', @result);
+SELECT @result;
+
+CALL checkLogin('member', 'vancuong', @result);
+SELECT @result;
+
+
+CALL checkLogin('banded', 'vancuong', @result);
+SELECT @result;
+
+SHOW CREATE PROCEDURE infoUser;
+-------------------------------------------------------------------------------------------------------------------------------
+SELECT sv.ID, TEN, TUOI, SOTIEN
+        FROM MUONSACH,SINHVIEN sv
+        WHERE  sv.ID = MUONSACH.SINHVIEN_ID;
+-------------------------------------------------------------------------------------------------------------------------------
+ SELECT  SINHVIEN.ID, TEN, SOTIEN, NGAY
+     FROM SINHVIEN
+     INNER JOIN MUONSACH
+     ON SINHVIEN.ID = MUONSACH.SINHVIEN_ID;
+-------------------------------------------------------------------------------------------------------------------------------
+  SELECT  SINHVIEN.ID, TEN, SOTIEN, NGAY
+     FROM SINHVIEN
+     LEFT JOIN MUONSACH
+     ON SINHVIEN.ID = MUONSACH.SINHVIEN_ID;
+     
+     Lấy tất cả các dòng map,còn lại lấy của bảng sinhvien,nếu trường nào không có ở sinhvien thi là null
+-------------------------------------------------------------------------------------------------------------------------------
+     SELECT  SINHVIEN.ID, TEN, SOTIEN, NGAY
+     FROM SINHVIEN
+     RIGHT JOIN MUONSACH
+     ON SINHVIEN.ID = MUONSACH.SINHVIEN_ID;
+     
+     Ngược lại bên trên thôi
+-------------------------------------------------------------------------------------------------------------------------------
+     SELECT  sv.ID, TEN, SOTIEN, NGAY
+     FROM SINHVIEN sv
+     FULL JOIN MUONSACH ms
+     ON SINHVIEN.ID = ms.SINHVIEN_ID;
+     
+     Lấy 2 bảng luôn
+-------------------------------------------------------------------------------------------------------------------------------
+SELECT MAX(hocphi) FROM sinhvien WHERE hocphi NOT IN( SELECT MAX(hocphi) FROM sinhvien)
+
+ SELECT * FROM SINHVIEN ORDER BY HOCPHI DESC LIMIT 1 OFFSET 1
+----------------------------------------------------------------------------------------------------------------------------------
+SELECT  SINHVIEN.ID ,ten, MAX(SOTIEN) FROM Sinhvien LEFT JOIN MUONSACH ON SINHVIEN.ID = MUONSACH.SINHVIEN_ID GROUP BY Sinhvien.id
+----------------------------------------------------------------------------------------------------------------------------------
+  SELECT CURDATE();SELECT GetDate();
+----------------------------------------------------------------------------------------------------------------------------------
+SELECT DISTINCT EmpName FROM Employees WHERE DOB BETWEEN ‘01/01/1960’ AND ‘31/12/1975’;
+----------------------------------------------------------------------------------------------------------------------------------
+sELECT COUNT(*), sex from Employees WHERE DOB BETWEEN ‘01/01/1960 ‘ AND ‘31/12/1975’ GROUP BY sex;
+----------------------------------------------------------------------------------------------------------------------------------
+SELECT * from Employees  WHERE upper(EmpName) like upper('joe%');
+----------------------------------------------------------------------------------------------------------------------------------

@@ -53,6 +53,7 @@ public class LstEmpAction extends ActionSupport implements ServletRequestAware{
 		rows=employeeManager.getAllEmployeesByNativeCode(page,row);
 		rows=employeeManager.getAllEmployeesByNativeCodeArray(page,row);
 		total = employeeManager.getTotalEmployeesByNativeCode().intValue();
+		rows=employeeManager.getAllEmployeesByNativeCodeArrayUsingProcedure(page, row);
 		return "success";
 	}
 

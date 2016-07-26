@@ -132,4 +132,16 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 		}
 		return lstRs;
 	}
+
+	@Override
+	public List<Object[]> getAllEmployeesByNativeCodeArrayUsingProcedure(int page, int row) {
+		List<EmployeeEntity> lstRs = new ArrayList<EmployeeEntity>();
+		page=page-1;
+		StringBuilder sql = new StringBuilder("CALL GetAllEmployee("+row+","+page*row+")");
+		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery(sql.toString());
+//		q.setParameter("limit", row);
+//		q.setParameter("offset", (page-1)*row);
+		List<Object[]> lst= q.list();
+		return lst;
+	}
 }
