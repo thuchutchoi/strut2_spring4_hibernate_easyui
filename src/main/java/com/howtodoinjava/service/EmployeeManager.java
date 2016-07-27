@@ -23,4 +23,6 @@ public interface EmployeeManager {
 	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row);
 	public List<EmployeeEntity> getAllEmployeesByNativeCodeArrayUsingProcedure(int page, int row);
 	public int getTotalEmployeesByNativeAndCallFunction();
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName);
+	public int getTotalEmployees(String firstName, String lastName);
 }

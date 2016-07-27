@@ -15,50 +15,62 @@
 </head>
 <body>
  
-<h2>Spring-4 + Struts-3 + Hibernate Integration Demo</h2>
+<!-- <h2>Spring-4 + Struts-3 + Hibernate Integration Demo</h2> -->
  
-<s:form method="post" action="add">
-    <table >
-	    <tr>
-	        <td><s:textfield key="label.firstname" name="employee.firstname"/></td> 
-	    </tr>
-	    <tr>
-	        <td><s:textfield key="label.lastname" name="employee.lastname"/></td>
-	    </tr>
-	    <tr>
-	        <td><s:textfield key="label.email" name="employee.email"/></td>
-	    </tr>
-	    <tr>
-	        <td><s:textfield key="label.telephone" name="employee.telephone"/></td>
-	    </tr>
-	    <tr>
-	        <td>
-	        	<s:submit key="label.add"></s:submit>
-	        </td>
-	    </tr>
-	</table> 
-</s:form>
+<%-- <s:form method="post" action="add"> --%>
+<!--     <table > -->
+<!-- 	    <tr> -->
+<%-- 	        <td><s:textfield key="label.firstname" name="employee.firstname"/></td>  --%>
+<!-- 	    </tr> -->
+<!-- 	    <tr> -->
+<%-- 	        <td><s:textfield key="label.lastname" name="employee.lastname"/></td> --%>
+<!-- 	    </tr> -->
+<!-- 	    <tr> -->
+<%-- 	        <td><s:textfield key="label.email" name="employee.email"/></td> --%>
+<!-- 	    </tr> -->
+<!-- 	    <tr> -->
+<%-- 	        <td><s:textfield key="label.telephone" name="employee.telephone"/></td> --%>
+<!-- 	    </tr> -->
+<!-- 	    <tr> -->
+<!-- 	        <td> -->
+<%-- 	        	<s:submit key="label.add"></s:submit> --%>
+<!-- 	        </td> -->
+<!-- 	    </tr> -->
+<!-- 	</table>  -->
+<%-- </s:form> --%>
  
      
-<h3>Employees</h3>
-<c:if  test="${!empty employees}">
-	<table class="list">
-		<tr>
-		    <th align="left">Name</th>
-		    <th align="left">Email</th>
-		    <th align="left">Telephone</th>
-		    <th align="left">Actions</th>
-		</tr>
-		<c:forEach items="${employees}" var="emp">
-		    <tr>
-		        <td>${emp.lastname}, ${emp.firstname} </td>
-		        <td>${emp.email}</td>
-		        <td>${emp.telephone}</td>
-		        <td><a href="delete/${emp.id}">delete</a></td>
-		    </tr>
-		</c:forEach>
-	</table>
-</c:if>
+<!-- <h3>Employees</h3> -->
+<%-- <c:if  test="${!empty employees}"> --%>
+<!-- 	<table class="list"> -->
+<!-- 		<tr> -->
+<!-- 		    <th align="left">Name</th> -->
+<!-- 		    <th align="left">Email</th> -->
+<!-- 		    <th align="left">Telephone</th> -->
+<!-- 		    <th align="left">Actions</th> -->
+<!-- 		</tr> -->
+<%-- 		<c:forEach items="${employees}" var="emp"> --%>
+<!-- 		    <tr> -->
+<%-- 		        <td>${emp.lastname}, ${emp.firstname} </td> --%>
+<%-- 		        <td>${emp.email}</td> --%>
+<%-- 		        <td>${emp.telephone}</td> --%>
+<%-- 		        <td><a href="delete/${emp.id}">delete</a></td> --%>
+<!-- 		    </tr> -->
+<%-- 		</c:forEach> --%>
+<!-- 	</table> -->
+<%-- </c:if> --%>
+ <form id="fmSearch" method="post" novalidate>
+ 	 <table cellpadding="5">
+          <tr>
+              <td>First Name:</td>
+              <td><input class="easyui-textbox firstname" type="text" name="firstname"></input></td>
+              <td>Last Name:</td>
+              <td><input class="easyui-textbox lastname" type="text" name="lastname"></input></td>
+              <td><a href="javascript:void(0)" class="easyui-linkbutton c6 searchBt" iconCls="icon-ok" style="width:90px">Search</a></td>
+              <td><a href="javascript:void(0)" class="easyui-linkbutton c6 clearBt" iconCls="icon-ok" style="width:90px">Clear</a></td>
+          </tr>
+    </table>
+ </form>
  <table id="dg"></table>
  <div id="toolbar">
      <a href="javascript:void(0)" class="easyui-linkbutton addBt" iconCls="icon-add" plain="true">New User</a>

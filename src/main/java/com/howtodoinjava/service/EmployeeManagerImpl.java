@@ -116,4 +116,16 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	public int getTotalEmployeesByNativeAndCallFunction() {
 		return  employeeDAO.getTotalEmployeesByNativeAndCallFunction();
 	}
+
+	@Override
+	@Transactional
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName) {
+		return employeeDAO.getAllEmployees(page, row,firstName,lastName);
+	}
+
+	@Override
+	@Transactional
+	public int getTotalEmployees(String firstName, String lastName) {
+		return employeeDAO.getTotalEmployees(firstName,lastName);
+	}
 }

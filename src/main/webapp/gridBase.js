@@ -65,6 +65,26 @@ $(document).ready(function () {
         $(".saveBt").click(function() {
 	        saveUser();
 	    });
+        $(".searchBt").click(function() {
+        	searchEmployee();
+	    });
+        $(".clearBt").click(function() {
+        	 $('#fmSearch').form('clear');
+	    });
+        
+        function searchEmployee(){
+        	$('#dg').datagrid('load',{
+        		 onBeforeLoad: function(param){
+                     console.log("before load");
+//                   param.firstname=$(".firstname").val();
+//                   param.lastName=$(".lastName").val();
+                 }, 
+        		firstname: $(".firstname").val(),
+        		lastName: $(".lastName").val()
+               
+    	    });
+        }
+        
 //        $("#dg").datagrid({
 //            title:'DataGrid例子',
 //            width:600,
@@ -94,6 +114,8 @@ $(document).ready(function () {
 //            pagination:true,    
 //            rownumbers:true
 //        });
+        var a=$(".firstname").val();
+        var b = $(".lastName").val();
         $('#dg').datagrid({
         	toolbar: '#toolbar',
         	width:780,
@@ -104,6 +126,13 @@ $(document).ready(function () {
             rownumbers:"true",
             iconCls:"icon-save",
             pagination:"true",
+            onBeforeLoad: function(param){
+            	
+                console.log("before load");
+                param.firstname=$(".firstname").val();
+                param.lastName=$(".lastName").val();
+                debugger;
+            }, 
             columns:[[
                 {field:'firstname',title:'First Name',width:175,align:'center'},
                 {field:'lastname',title:'Last Name',width:175,align:'center'},

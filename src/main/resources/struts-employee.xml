@@ -17,6 +17,9 @@
 		<action name="get_employee" class="lstEmpAction" method="execute">
 			<result name="success" type="json"/>
 		</action>
+		<action name="searchEmployee" class="lstEmpAction" method="execute">
+			<result name="success" type="json"/>
+		</action>
 		<action name="delete/*" class="editEmployeeAction" method="deleteEmployee">
 		    <param name="employee.id">{1}</param>
 			<result type="redirect">/list</result>

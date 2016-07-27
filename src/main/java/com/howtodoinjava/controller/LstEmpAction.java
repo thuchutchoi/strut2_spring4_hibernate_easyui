@@ -47,14 +47,18 @@ public class LstEmpAction extends ActionSupport implements ServletRequestAware{
 		logger.info("listEmployees method called");
 		int page =Integer.parseInt(servletRequest.getParameter("page"));
 		int row = Integer.parseInt(servletRequest.getParameter("rows"));
+		String firstName=servletRequest.getParameter("firstname");
+		String lastName=servletRequest.getParameter("lastName");
 		//rows = new ArrayList<EmployeeEntity>();
-		rows=employeeManager.getAllEmployees(page,row);
-		total = employeeManager.getTotalEmployees();
-		rows=employeeManager.getAllEmployeesByNativeCode(page,row);
-		rows=employeeManager.getAllEmployeesByNativeCodeArray(page,row);
-		total = employeeManager.getTotalEmployeesByNativeCode().intValue();
-		rows=employeeManager.getAllEmployeesByNativeCodeArrayUsingProcedure(page, row);
-		total = employeeManager.getTotalEmployeesByNativeAndCallFunction();
+//		rows=employeeManager.getAllEmployees(page,row,firstName,lastName);
+//		total = employeeManager.getTotalEmployees();
+//		rows=employeeManager.getAllEmployeesByNativeCode(page,row);
+//		rows=employeeManager.getAllEmployeesByNativeCodeArray(page,row);
+//		total = employeeManager.getTotalEmployeesByNativeCode().intValue();
+//		rows=employeeManager.getAllEmployeesByNativeCodeArrayUsingProcedure(page, row);
+//		total = employeeManager.getTotalEmployeesByNativeAndCallFunction();
+		rows=employeeManager.getAllEmployees(page,row,firstName,lastName);
+		total = employeeManager.getTotalEmployees(firstName,lastName);
 		return "success";
 	}
 

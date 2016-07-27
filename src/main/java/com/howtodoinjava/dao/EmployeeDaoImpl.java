@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
@@ -150,5 +151,38 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery(" SELECT getTotalEmployees()");
 		q.uniqueResult();
 		return (Integer) q.uniqueResult();
+	}
+
+	@Override
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName) {
+		StringBuilder sql = new StringBuilder("from EmployeeEntity where 1 = 1");
+		if(!StringUtils.isBlank(firstName)){
+			sql.append("and firstname = "+"'"+firstName+"'");
+		}
+		if(!StringUtils.isBlank(lastName)){
+			sql.append("and lastName = "+"'"+lastName+"'");
+		}
+		Query q = this.sessionFactory.getCurrentSession().createQuery(sql.toString());
+		q.setFirstResult((page - 1) * row);
+		q.setMaxResults(row);
+		return q.list();
+	}
+
+	@Override
+	public int getTotalEmployees(String firstName, String lastName) {
+		StringBuilder sql = new StringBuilder("SELECT COUNT(e.id) FROM EmployeeEntity e where 1 = 1 ");
+		if(!StringUtils.isBlank(firstName)){
+			sql.append("and firstname = "+"'"+firstName+"'");
+		}
+		if(!StringUtils.isBlank(lastName)){
+			sql.append("and lastName = "+"'"+lastName+"'");
+		}
+		Query q = this.sessionFactory.getCurrentSession().createQuery(sql.toString());
+		Long count = (Long) q.uniqueResult();
+		return count.intValue();
+	}
+	public static void main(String[] args) {
+		String a="'"+"xxx"+"'";
+		System.out.println(a);
 	}
 }
