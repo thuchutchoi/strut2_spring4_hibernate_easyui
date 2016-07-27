@@ -22,4 +22,5 @@ public interface EmployeeManager {
 	public Long getTotalEmployeesByNativeCode();
 	public List<EmployeeEntity> getAllEmployeesByNativeCodeArray(int page, int row);
 	public List<EmployeeEntity> getAllEmployeesByNativeCodeArrayUsingProcedure(int page, int row);
+	public int getTotalEmployeesByNativeAndCallFunction();
 }

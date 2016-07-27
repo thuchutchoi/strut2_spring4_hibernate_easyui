@@ -144,4 +144,11 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 		List<Object[]> lst= q.list();
 		return lst;
 	}
+
+	@Override
+	public int getTotalEmployeesByNativeAndCallFunction() {
+		SQLQuery q = this.sessionFactory.getCurrentSession().createSQLQuery(" SELECT getTotalEmployees()");
+		q.uniqueResult();
+		return (Integer) q.uniqueResult();
+	}
 }

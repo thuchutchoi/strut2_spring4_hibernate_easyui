@@ -110,4 +110,10 @@ public class EmployeeManagerImpl implements EmployeeManager {
 		}
 		return lstEmp;
 	}
+
+	@Override
+	@Transactional
+	public int getTotalEmployeesByNativeAndCallFunction() {
+		return  employeeDAO.getTotalEmployeesByNativeAndCallFunction();
+	}
 }

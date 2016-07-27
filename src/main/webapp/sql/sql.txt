@@ -153,3 +153,17 @@ sELECT COUNT(*), sex from Employees WHERE DOB BETWEEN ‘01/01/1960 ‘ AND ‘3
 ----------------------------------------------------------------------------------------------------------------------------------
 SELECT * from Employees  WHERE upper(EmpName) like upper('joe%');
 ----------------------------------------------------------------------------------------------------------------------------------
+
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS `getTotalEmployees`$$
+CREATE FUNCTION getTotalEmployees()  
+RETURNS INT
+READS SQL DATA
+BEGIN
+    DECLARE total INT(11);
+      SELECT COUNT(id) INTO total FROM `employee`;
+  RETURN total; 
+END$$
+DELIMITER;
+---------------------------------------------------------------------------------------------------------------------------------
