@@ -1,6 +1,7 @@
 package com.howtodoinjava.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
@@ -26,4 +27,6 @@ public interface EmployeeDAO
 	public int getTotalEmployeesByNativeAndCallFunction();
 	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName);
 	public int getTotalEmployees(String firstName, String lastName);
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, String sortField, String typeSort);
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, Map<String, String> map);
 }

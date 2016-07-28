@@ -46,5 +46,8 @@
 			<result>/view/register.jsp</result>
 		</action>
 		
+		<action name="pagingClient">
+			<result>/view/gridPagingClient.jsp</result>
+		</action>
 	</package>
 </struts>

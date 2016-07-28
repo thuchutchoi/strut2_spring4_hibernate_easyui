@@ -3,6 +3,9 @@ package com.howtodoinjava.dao;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
@@ -182,7 +185,84 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 		return count.intValue();
 	}
 	public static void main(String[] args) {
-		String a="'"+"xxx"+"'";
-		System.out.println(a);
+//		String a="'"+"xxx"+"'";
+//		System.out.println(a);
+//		org.apache.commons.lang.ArrayUtils aa;
+//		org.apache.commons.lang.BitField bb;
+//		org.apache.commons.lang.BooleanUtils bl;
+//		org.apache.commons.lang.CharEncoding ce;
+//		org.apache.commons.lang.CharRange cr;
+//		org.apache.commons.lang.CharSet cs;
+//		org.apache.commons.lang.CharSetUtils csu;
+//		org.apache.commons.lang.StringUtils un;
+		String a="from EmployeeEntity where 1 = 1 ORDER BY firstname asc,";
+		int abc=a.lastIndexOf(",");
+		System.out.println(a.substring(0,abc));
+		
+	}
+
+	@Override
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, String sortField, String typeSort) {
+		StringBuilder sql = new StringBuilder("from EmployeeEntity where 1 = 1");
+		if(!StringUtils.isBlank(firstName)){
+			sql.append(" and firstname = "+"'"+firstName+"'");
+		}
+		if(!StringUtils.isBlank(lastName)){
+			sql.append(" and lastName = "+"'"+lastName+"'");
+		}
+		if(!StringUtils.isBlank(sortField)){
+			sql.append(" ORDER BY "+sortField);
+			if(!StringUtils.isBlank(typeSort)){
+				sql.append(" "+typeSort);
+			}
+			else{
+				sql.append(" ASC");
+			}
+		}
+		Query q = this.sessionFactory.getCurrentSession().createQuery(sql.toString());
+		q.setFirstResult((page - 1) * row);
+		q.setMaxResults(row);
+		return q.list();
+	}
+
+	@Override
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, Map<String, String> map) {
+		StringBuilder sql = new StringBuilder("from EmployeeEntity where 1 = 1");
+		if(!StringUtils.isBlank(firstName)){
+			sql.append(" and firstname = "+"'"+firstName+"'");
+		}
+		if(!StringUtils.isBlank(lastName)){
+			sql.append(" and lastName = "+"'"+lastName+"'");
+		}
+		Set<Entry<String, String>> entrySet = map.entrySet();
+		if(entrySet.size()>0){
+			 sql.append(" ORDER BY ");
+			 for ( Map.Entry<String, String> entry : entrySet) {
+				    String sortField = entry.getKey();
+				    String typeSort = entry.getValue();
+				    sql.append(sortField);
+				    sql.append(" "+typeSort);
+				    sql.append(",");
+				}
+		}
+		
+//		if(!StringUtils.isBlank(sortField)){
+//			sql.append(" ORDER BY "+sortField);
+//			if(!StringUtils.isBlank(typeSort)){
+//				sql.append(" "+typeSort);
+//			}
+//			else{
+//				sql.append(" ASC");
+//			}
+//		}
+		String sqlQuery = sql.toString();
+		int lastIndexOf = sqlQuery.lastIndexOf(",");
+		if(lastIndexOf>0){
+			sqlQuery=sqlQuery.substring(0, lastIndexOf);
+		}
+		Query q = this.sessionFactory.getCurrentSession().createQuery(sqlQuery);
+		q.setFirstResult((page - 1) * row);
+		q.setMaxResults(row);
+		return q.list();
 	}
 }

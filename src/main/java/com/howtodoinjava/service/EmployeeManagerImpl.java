@@ -2,6 +2,7 @@ package com.howtodoinjava.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.ObjectNotFoundException;
@@ -127,5 +128,17 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	@Transactional
 	public int getTotalEmployees(String firstName, String lastName) {
 		return employeeDAO.getTotalEmployees(firstName,lastName);
+	}
+
+	@Override
+	@Transactional
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, String sortField, String typeSort) {
+		return employeeDAO.getAllEmployees(page,row,firstName,lastName,sortField,typeSort);
+	}
+
+	@Override
+	@Transactional
+	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName, Map<String, String> map) {
+		return employeeDAO.getAllEmployees(page,row,firstName,lastName,map);
 	}
 }

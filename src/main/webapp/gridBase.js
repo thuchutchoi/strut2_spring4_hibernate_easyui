@@ -122,22 +122,24 @@ $(document).ready(function () {
         	height:250,
         	title:'DataGrid',
             url:'get_employee.action',
+//            sortName:'firstname',
+//            sortOrder:'asc',
             nowrap:false,
             rownumbers:"true",
             iconCls:"icon-save",
             pagination:"true",
+            multiSort:"true",
             onBeforeLoad: function(param){
             	
                 console.log("before load");
                 param.firstname=$(".firstname").val();
                 param.lastName=$(".lastName").val();
-                debugger;
             }, 
             columns:[[
-                {field:'firstname',title:'First Name',width:175,align:'center'},
-                {field:'lastname',title:'Last Name',width:175,align:'center'},
-                {field:'telephone',title:'Phone',width:175,align:'center'},
-                {field:'email',title:'Email',width:175,align:'center'}
+                {field:'firstname',title:'First Name',width:175,align:'center',sortable:'true'},
+                {field:'lastname',title:'Last Name',width:175,align:'center',sortable:'true'},
+                {field:'telephone',title:'Phone',width:175,align:'center',sortable:'true'},
+                {field:'email',title:'Email',width:175,align:'center',sortable:'true'}
             ]]
         });
         
