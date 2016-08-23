@@ -119,7 +119,7 @@ $(document).ready(function () {
         $('#dg').datagrid({
         	toolbar: '#toolbar',
         	width:780,
-        	height:250,
+        	height:450,
         	title:'DataGrid',
             url:'get_employee.action',
 //            sortName:'firstname',
@@ -129,6 +129,15 @@ $(document).ready(function () {
             iconCls:"icon-save",
             pagination:"true",
             multiSort:"true",
+            rowStyler: function(index,row){
+                if (row.firstname==="nghiant"){
+                    return 'background-color:#6293BB;color:#fff;font-weight:bold;';
+                }
+                else
+                {
+                	return 'background-color:#555;color:#e67e22';
+                }
+            },
             onBeforeLoad: function(param){
             	
                 console.log("before load");

@@ -49,5 +49,12 @@
 		<action name="pagingClient">
 			<result>/view/gridPagingClient.jsp</result>
 		</action>
+		<action name="rowEdit">
+			<result>/view/rowEdit.jsp</result>
+		</action>
+		
+		<action name="datagrid" class="com.howtodoinjava.controller.ItemAction" method="execute">
+			<result name="success" type="json"/>
+		</action>
 	</package>
 </struts>
