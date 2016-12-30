@@ -65,6 +65,26 @@ $(document).ready(function () {
         $(".saveBt").click(function() {
 	        saveUser();
 	    });
+        $(".searchBt").click(function() {
+        	searchEmployee();
+	    });
+        $(".clearBt").click(function() {
+        	 $('#fmSearch').form('clear');
+	    });
+        
+        function searchEmployee(){
+        	$('#dg').datagrid('load',{
+        		 onBeforeLoad: function(param){
+                     console.log("before load");
+//                   param.firstname=$(".firstname").val();
+//                   param.lastName=$(".lastName").val();
+                 }, 
+        		firstname: $(".firstname").val(),
+        		lastName: $(".lastName").val()
+               
+    	    });
+        }
+        
 //        $("#dg").datagrid({
 //            title:'DataGrid例子',
 //            width:600,
@@ -94,22 +114,44 @@ $(document).ready(function () {
 //            pagination:true,    
 //            rownumbers:true
 //        });
+        var a=$(".firstname").val();
+        var b = $(".lastName").val();
         $('#dg').datagrid({
         	toolbar: '#toolbar',
         	width:780,
-        	height:250,
+        	height:450,
         	title:'DataGrid',
             url:'get_employee.action',
+//            sortName:'firstname',
+//            sortOrder:'asc',
             nowrap:false,
             rownumbers:"true",
             iconCls:"icon-save",
             pagination:"true",
+            multiSort:"true",
+            rowStyler: function(index,row){
+                if (row.firstname==="nghiant"){
+                    return 'background-color:#6293BB;color:#fff;font-weight:bold;';
+                }
+                else
+                {
+                	return 'background-color:#555;color:#e67e22';
+                }
+            },
+            onBeforeLoad: function(param){
+            	
+                console.log("before load");
+                param.firstname=$(".firstname").val();
+                param.lastName=$(".lastName").val();
+            }, 
             columns:[[
-                {field:'firstname',title:'First Name',width:175,align:'center'},
-                {field:'lastname',title:'Last Name',width:175,align:'center'},
-                {field:'telephone',title:'Phone',width:175,align:'center'},
-                {field:'email',title:'Email',width:175,align:'center'}
+                {field:'firstname',title:'First Name',width:175,align:'center',sortable:'true'},
+                {field:'lastname',title:'Last Name',width:175,align:'center',sortable:'true'},
+                {field:'telephone',title:'Phone',width:175,align:'center',sortable:'true'},
+                {field:'email',title:'Email',width:175,align:'center',sortable:'true'}
             ]]
         });
-        
+        $(".saveBt2").click(function() {
+        	jQuery(".testLbXSS").text(jQuery(".testXSS").val());
+	    });
 });

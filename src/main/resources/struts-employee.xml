@@ -17,6 +17,9 @@
 		<action name="get_employee" class="lstEmpAction" method="execute">
 			<result name="success" type="json"/>
 		</action>
+		<action name="searchEmployee" class="lstEmpAction" method="execute">
+			<result name="success" type="json"/>
+		</action>
 		<action name="delete/*" class="editEmployeeAction" method="deleteEmployee">
 		    <param name="employee.id">{1}</param>
 			<result type="redirect">/list</result>
@@ -39,5 +42,19 @@
 			<result name="success" type="json"/>
 		</action>
 		
+		<action name="register" class="editEmployeeAction" method="listEmployees">
+			<result>/view/register.jsp</result>
+		</action>
+		
+		<action name="pagingClient">
+			<result>/view/gridPagingClient.jsp</result>
+		</action>
+		<action name="rowEdit">
+			<result>/view/rowEdit.jsp</result>
+		</action>
+		
+		<action name="datagrid" class="com.howtodoinjava.controller.ItemAction" method="execute">
+			<result name="success" type="json"/>
+		</action>
 	</package>
 </struts>

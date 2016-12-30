@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.hibernate.HibernateException;
+import org.hibernate.ObjectNotFoundException;
 
 import com.howtodoinjava.entity.EmployeeEntity;
 import com.howtodoinjava.service.EmployeeManager;
@@ -38,7 +40,13 @@ public class EditEmployeeAction extends ActionSupport implements Preparable,Serv
 	// This method will be called when a employee object is added
 	public String addEmployee() {
 		logger.info("addEmployee method called");
-		employeeManager.addEmployee(employee);
+		try {
+			employeeManager.addEmployee(employee);
+			success=true;
+		} catch (HibernateException e) {
+			errorMsg="Can not save object";
+		}
+		
 		return SUCCESS;
 	}
 
@@ -66,6 +74,10 @@ public class EditEmployeeAction extends ActionSupport implements Preparable,Serv
 			success = true;
 		} catch (NumberFormatException e) {
 			errorMsg="NumberFormatException";
+		}catch (ObjectNotFoundException e) {
+			errorMsg="Object not found";
+		}catch (HibernateException e) {
+			errorMsg="Can not remove object";
 		}
 		
 		return SUCCESS;

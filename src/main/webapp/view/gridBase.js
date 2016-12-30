@@ -65,5 +65,8 @@ $(document).ready(function () {
         $(".saveBt").click(function() {
 	        saveUser();
 	    });
+        $(".saveBt2").click(function() {
+	        alert("toi co vao");
+	    });
         
 });
