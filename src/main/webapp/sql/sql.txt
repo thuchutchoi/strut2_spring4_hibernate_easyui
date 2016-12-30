@@ -168,3 +168,8 @@ END$$
 DELIMITER;
 ---------------------------------------------------------------------------------------------------------------------------------
 BLY26-U15KK-T51UJ-F77JW-NK351
+
+SELECT * FROM `employee` WHERE `FIRSTNAME` = 'thehalfheart' AND `LASTNAME` = 'something' OR '1'
+
+
+' or 1=1 -- 

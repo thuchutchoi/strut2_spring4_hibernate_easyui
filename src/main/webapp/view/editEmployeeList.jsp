@@ -104,5 +104,16 @@
      <a href="javascript:void(0)" class="easyui-linkbutton c6 saveBt" iconCls="icon-ok" style="width:90px">Save</a>
      <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
  </div>
+  <table > 
+	    <tr>
+	        <td><input class="easyui-textbox testXSS" required="true"></td> 
+	        <td>
+	        	<a href="javascript:void(0)" class="easyui-linkbutton c6 saveBt2" iconCls="icon-ok" style="width:90px">Save</a>
+	        </td>
+	        <td>
+	        	 <div class="testLbXSS"></div>
+	        </td>
+	    </tr>
+	</table> 
 </body>
 </html>

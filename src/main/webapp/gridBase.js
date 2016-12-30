@@ -151,5 +151,7 @@ $(document).ready(function () {
                 {field:'email',title:'Email',width:175,align:'center',sortable:'true'}
             ]]
         });
-        
+        $(".saveBt2").click(function() {
+        	jQuery(".testLbXSS").text(jQuery(".testXSS").val());
+	    });
 });

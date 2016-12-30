@@ -160,7 +160,7 @@ public class EmployeeDaoImpl implements EmployeeDAO {
 	public List<EmployeeEntity> getAllEmployees(int page, int row, String firstName, String lastName) {
 		StringBuilder sql = new StringBuilder("from EmployeeEntity where 1 = 1");
 		if(!StringUtils.isBlank(firstName)){
-			sql.append("and firstname = "+"'"+firstName+"'");
+			sql.append(" and firstname = "+"'"+firstName+"'");
 		}
 		if(!StringUtils.isBlank(lastName)){
 			sql.append("and lastName = "+"'"+lastName+"'");
